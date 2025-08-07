@@ -72,17 +72,20 @@ The application includes a comprehensive test suite using Python's built-in `uni
 ### Running Tests
 
 Run all tests:
+
 ```bash
 python run_tests.py
 ```
 
 Run specific test module:
+
 ```bash
 python run_tests.py test_routes
 python run_tests.py test_database
 ```
 
 Run individual test file:
+
 ```bash
 python -m unittest tests.test_routes
 ```
@@ -97,6 +100,7 @@ The test suite includes:
 - **Data Population Tests** (`test_populate_data.py`): Test data setup and constraints
 
 **29 tests total** covering:
+
 - Web route functionality
 - API endpoint responses
 - Database operations
