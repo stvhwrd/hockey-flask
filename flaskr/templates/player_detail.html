@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}{{ player.name }} - Players - Fantasy Hockey Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{{ url_for('players.index') }}">Players</a>
+    <span>{{ player.name }}</span>
+</div>
+
+<div class="card">
+    <h2>🏒 {{ player.name }}</h2>
+
+    <div class="row">
+        <div class="six columns">
+            <p><strong>Position:</strong>
+                <span class="position-badge {% if player.position in ['LW', 'RW', 'C'] %}forward{% elif player.position in ['D'] %}defense{% elif player.position in ['G'] %}goalie{% endif %}">
+                    {{ player.position }}
+                </span>
+            </p>
+            <p><strong>Team:</strong>
+                {% if player.team_name %}
+                    {{ player.team_name }} ({{ player.abbreviation }})
+                {% else %}
+                    <span style="color: #dc3545;">Free Agent</span>
+                {% endif %}
+            </p>
+            <p><strong>Jersey Number:</strong> #{{ player.jersey_number or "N/A" }}</p>
+        </div>
+        <div class="six columns">
+            <p><strong>Age:</strong> {{ player.age or "N/A" }}</p>
+            <p><strong>Height:</strong> {{ player.height or "N/A" }}</p>
+            <p><strong>Weight:</strong>
+                {% if player.weight %}
+                    {{ player.weight }} lbs
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>📊 Career Statistics</h3>
+
+    {% if stats %}
+        <div style="overflow-x: auto;">
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>Season</th>
+                        <th>GP</th>
+                        <th>G</th>
+                        <th>A</th>
+                        <th>P</th>
+                        <th>+/-</th>
+                        <th>PIM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                        <tr>
+                            <td><strong>{{ stat.season }}</strong></td>
+                            <td>{{ stat.games_played }}</td>
+                            <td>{{ stat.goals }}</td>
+                            <td>{{ stat.assists }}</td>
+                            <td><strong>{{ stat.points }}</strong></td>
+                            <td {% if stat.plus_minus > 0 %}style="color: #28a745;"{% elif stat.plus_minus < 0 %}style="color: #dc3545;"{% endif %}>
+                                {% if stat.plus_minus > 0 %}+{% endif %}{{ stat.plus_minus }}
+                            </td>
+                            <td>{{ stat.penalty_minutes }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h4>No Statistics Available</h4>
+            <p>No career statistics found for this player.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}{{ team.city }} {{ team.name }} - NHL Teams - Fantasy Hockey Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{{ url_for('teams.index') }}">NHL Teams</a>
+    <span>{{ team.city }} {{ team.name }}</span>
+</div>
+
+<div class="team-info">
+    <h2>🥅 {{ team.city }} {{ team.name }}</h2>
+    <div class="row">
+        <div class="six columns">
+            <p><strong>Abbreviation:</strong> {{ team.abbreviation }}</p>
+            <p><strong>Conference:</strong> {{ team.conference }}</p>
+        </div>
+        <div class="six columns">
+            <p><strong>Division:</strong> {{ team.division }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>🏒 Team Roster</h3>
+
+    {% if positions %}
+        {% for pos, pos_players in positions.items() %}
+            <div class="roster-section">
+                <h4 style="background: #2c3e50; color: white; padding: 0.75rem 1rem; margin: 0 0 1rem 0; border-radius: 4px;">
+                    {{ pos }} ({{ pos_players|length }})
+                </h4>
+
+                <div class="row">
+                    {% for player in pos_players %}
+                        <div class="four columns">
+                            <div class="player-item" style="margin-bottom: 0.5rem;">
+                                <div>
+                                    <span class="player-name">
+                                        <a href="{{ url_for('players.detail', id=player.id) }}" style="text-decoration: none; color: #2c3e50;">
+                                            {{ player.name }}
+                                        </a>
+                                    </span>
+                                    <span class="position-badge {% if player.position in ['LW', 'RW', 'C'] %}forward{% elif player.position in ['D'] %}defense{% elif player.position in ['G'] %}goalie{% endif %}">
+                                        {{ player.position }}
+                                    </span>
+                                </div>
+                                <div class="player-details">
+                                    #{{ player.jersey_number or "N/A" }}
+                                </div>
+                            </div>
+                        </div>
+                        {% if loop.index % 3 == 0 and not loop.last %}
+                            </div><div class="row">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <h4>No Players Found</h4>
+            <p>This team doesn't have any players in the system yet.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

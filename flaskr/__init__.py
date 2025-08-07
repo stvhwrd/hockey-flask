@@ -34,16 +34,25 @@ def create_app(test_config=None):
     app.register_blueprint(teams.bp)
     app.register_blueprint(leagues.bp)
 
-    # a simple page that says hello
+    # home page
     @app.route('/')
     def index():
-        return '''
-        <h1>Fantasy Hockey Platform</h1>
-        <ul>
-            <li><a href="/players">Players</a></li>
-            <li><a href="/teams">Teams</a></li>
-            <li><a href="/leagues">Leagues</a></li>
-        </ul>
-        '''
+        from flask import render_template
+        from .db import get_db
+
+        # Get some basic stats for the dashboard
+        db = get_db()
+        stats = {}
+
+        try:
+            stats['total_players'] = db.execute('SELECT COUNT(*) as count FROM players').fetchone()['count']
+            stats['total_teams'] = db.execute('SELECT COUNT(*) as count FROM fantasy_teams').fetchone()['count']
+            stats['total_leagues'] = db.execute('SELECT COUNT(*) as count FROM fantasy_leagues').fetchone()['count']
+            stats['total_nhl_teams'] = db.execute('SELECT COUNT(*) as count FROM nhl_teams').fetchone()['count']
+        except Exception:
+            # If tables don't exist yet, show zeros
+            stats = {'total_players': 0, 'total_teams': 0, 'total_leagues': 0, 'total_nhl_teams': 0}
+
+        return render_template('index.html', stats=stats)
 
     return app

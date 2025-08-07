@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Players - Fantasy Hockey Platform{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>🏒 Players</h2>
+    <p>Browse all hockey players in the system.</p>
+</div>
+
+{% if players %}
+    <div class="card">
+        <div class="row">
+            <div class="twelve columns">
+                <ul class="clean-list">
+                    {% for player in players %}
+                        <li>
+                            <div class="row" style="margin-bottom: 0;">
+                                <div class="eight columns">
+                                    <strong><a href="{{ url_for('players.detail', id=player.id) }}">{{ player.name }}</a></strong>
+                                    <span class="position-badge {% if player.position in ['LW', 'RW', 'C'] %}forward{% elif player.position in ['D'] %}defense{% elif player.position in ['G'] %}goalie{% endif %}">
+                                        {{ player.position }}
+                                    </span>
+                                    <br>
+                                    <span style="color: #6c757d;">
+                                        {% if player.team_name %}
+                                            {{ player.team_name }} (#{{ player.jersey_number or 'N/A' }})
+                                        {% else %}
+                                            Free Agent
+                                        {% endif %}
+                                        {% if player.age %} • Age: {{ player.age }}{% endif %}
+                                    </span>
+                                </div>
+                                <div class="four columns" style="text-align: right;">
+                                    <a href="{{ url_for('players.detail', id=player.id) }}" class="button">View Player</a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <h3>No Players Found</h3>
+        <p>There are no players in the system yet.</p>
+    </div>
+{% endif %}
+{% endblock %}

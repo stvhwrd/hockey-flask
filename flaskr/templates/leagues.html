@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Fantasy Leagues - Fantasy Hockey Platform{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="display-6 mb-0">🏆 Fantasy Leagues</h1>
+        <p class="text-muted">Browse all fantasy hockey leagues in the system.</p>
+    </div>
+    <button class="btn btn-primary" onclick="alert('Coming soon!')">
+        <i class="bi bi-plus-circle me-2"></i>Create League
+    </button>
+</div>
+
+{% if leagues %}
+    <div class="row">
+        {% for league in leagues %}
+            <div class="col-lg-6 mb-4">
+                <div class="card hockey-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title mb-0">
+                                <a href="{{ url_for('leagues.detail', id=league.id) }}" class="text-decoration-none">
+                                    {{ league.name }}
+                                </a>
+                            </h5>
+                            <span class="badge bg-secondary">{{ league.season }}</span>
+                        </div>
+
+                        <div class="row text-center mb-3">
+                            <div class="col-6">
+                                <small class="text-muted d-block">Commissioner</small>
+                                <strong>{{ league.commissioner_name }}</strong>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted d-block">Max Teams</small>
+                                <strong>{{ league.max_teams }}</strong>
+                            </div>
+                        </div>
+
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <i class="bi bi-gear me-1"></i>{{ league.scoring_system }} scoring
+                            </small><br>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>Created {{ league.created_at }}
+                            </small>
+                        </p>
+
+                        <a href="{{ url_for('leagues.detail', id=league.id) }}" class="btn btn-outline-primary">
+                            <i class="bi bi-eye me-2"></i>View League
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="empty-state">
+        <i class="bi bi-trophy display-1"></i>
+        <h3>No Fantasy Leagues Found</h3>
+        <p>There are no fantasy leagues in the system yet.</p>
+        <button class="btn btn-primary" onclick="alert('Coming soon!')">
+            <i class="bi bi-plus-circle me-2"></i>Create Your First League
+        </button>
+    </div>
+{% endif %}
+{% endblock %}

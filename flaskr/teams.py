@@ -23,18 +23,7 @@ def index():
             conferences[conf][div] = []
         conferences[conf][div].append(team)
 
-    html = '<h1>NHL Teams</h1>'
-
-    for conf_name, divisions in conferences.items():
-        html += f'<h2>{conf_name} Conference</h2>'
-        for div_name, div_teams in divisions.items():
-            html += f'<h3>{div_name} Division</h3><ul>'
-            for team in div_teams:
-                html += f'<li><a href="/teams/{team["id"]}">{team["city"]} {team["name"]} ({team["abbreviation"]})</a></li>'
-            html += '</ul>'
-
-    html += '<a href="/">Back to Home</a>'
-    return html
+    return render_template('teams.html', conferences=conferences)
 
 
 @bp.route('/<int:id>')
@@ -55,34 +44,15 @@ def detail(id):
         (id,)
     ).fetchall()
 
-    html = f'''
-    <h1>{team["city"]} {team["name"]}</h1>
-    <p><strong>Abbreviation:</strong> {team["abbreviation"]}</p>
-    <p><strong>Conference:</strong> {team["conference"]}</p>
-    <p><strong>Division:</strong> {team["division"]}</p>
+    # Group players by position
+    positions = {}
+    for player in players:
+        pos = player['position']
+        if pos not in positions:
+            positions[pos] = []
+        positions[pos].append(player)
 
-    <h2>Roster</h2>
-    '''
-
-    if players:
-        # Group players by position
-        positions = {}
-        for player in players:
-            pos = player['position']
-            if pos not in positions:
-                positions[pos] = []
-            positions[pos].append(player)
-
-        for pos, pos_players in positions.items():
-            html += f'<h3>{pos}</h3><ul>'
-            for player in pos_players:
-                html += f'<li><a href="/players/{player["id"]}">{player["name"]} #{player["jersey_number"] or "N/A"}</a></li>'
-            html += '</ul>'
-    else:
-        html += '<p>No players found</p>'
-
-    html += '<br><a href="/teams">Back to Teams</a> | <a href="/">Home</a>'
-    return html
+    return render_template('nhl_team_detail.html', team=team, positions=positions)
 
 
 @bp.route('/api')

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}{{ team.name }} - {{ team.league_name }} - Fantasy Hockey Platform{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('leagues.index') }}">Leagues</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('leagues.detail', id=league_id) }}">{{ team.league_name }}</a></li>
+        <li class="breadcrumb-item active">{{ team.name }}</li>
+    </ol>
+</nav>
+
+<!-- Team Header -->
+<div class="team-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h1 class="display-5 mb-0">🥅 {{ team.name }}</h1>
+            <p class="lead mb-0 mt-2">
+                <strong>Owner:</strong> {{ team.owner_name }} |
+                <strong>League:</strong> <a href="{{ url_for('leagues.detail', id=league_id) }}" class="text-white text-decoration-underline">{{ team.league_name }}</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Team Roster -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title mb-0">
+            <i class="bi bi-people me-2"></i>Team Roster
+        </h3>
+    </div>
+    <div class="card-body">
+        {% if roster %}
+            <!-- Group roster by position type -->
+            {% set position_groups = {} %}
+            {% for player in roster %}
+                {% set current_list = position_groups.get(player.position_type, []) %}
+                {% set _ = current_list.append(player) %}
+                {% set _ = position_groups.update({player.position_type: current_list}) %}
+            {% endfor %}
+
+            {% for position_type, players in position_groups.items() %}
+                <div class="roster-section">
+                    <div class="roster-header">
+                        {{ position_type.title() }} ({{ players|length }})
+                    </div>
+
+                    <div class="row">
+                        {% for player in players %}
+                            <div class="col-lg-6 col-xl-4 mb-3">
+                                <div class="player-card">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <div class="player-name">{{ player.name }}</div>
+                                            <span class="position-badge {% if player.position in ['LW', 'RW', 'C'] %}forward{% elif player.position in ['D'] %}defense{% elif player.position in ['G'] %}goalie{% endif %}">
+                                                {{ player.position }}
+                                            </span>
+                                        </div>
+                                        <div class="player-details text-end">
+                                            {% if player.team_abbr %}
+                                                <small class="text-muted">{{ player.team_abbr }}</small>
+                                            {% else %}
+                                                <small class="text-danger">Free Agent</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <i class="bi bi-person-x display-1"></i>
+                <h4>No Players on Roster</h4>
+                <p>This team doesn't have any players yet.</p>
+                <button class="btn btn-primary" onclick="alert('Coming soon!')">
+                    <i class="bi bi-person-plus me-2"></i>Add Players
+                </button>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

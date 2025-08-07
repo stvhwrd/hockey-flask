@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Fantasy Hockey Platform{% endblock %}
+
+{% block content %}
+<!-- Welcome Header -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <h1 class="card-title display-4 mb-3">🏒 Welcome to Fantasy Hockey Platform!</h1>
+                <p class="card-text lead">Manage your fantasy hockey leagues, teams, and players all in one place.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats -->
+<div class="row mb-4">
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ stats.total_players or 0 }}</div>
+            <div class="stat-label">Players</div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ stats.total_teams or 0 }}</div>
+            <div class="stat-label">Teams</div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ stats.total_leagues or 0 }}</div>
+            <div class="stat-label">Leagues</div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ stats.total_nhl_teams or 0 }}</div>
+            <div class="stat-label">NHL Teams</div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Navigation Cards -->
+<div class="row">
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card hockey-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-people display-3 text-primary mb-3"></i>
+                <h5 class="card-title">Players</h5>
+                <p class="card-text">Browse and manage hockey players in the system. View stats, positions, and team assignments.</p>
+                <a href="{{ url_for('players.index') }}" class="btn btn-primary">View Players</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card hockey-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-shield display-3 text-success mb-3"></i>
+                <h5 class="card-title">NHL Teams</h5>
+                <p class="card-text">Explore NHL teams organized by conference and division. View team rosters and player assignments.</p>
+                <a href="{{ url_for('teams.index') }}" class="btn btn-success">View Teams</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card hockey-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-trophy display-3 text-warning mb-3"></i>
+                <h5 class="card-title">Fantasy Leagues</h5>
+                <p class="card-text">Create and manage fantasy hockey leagues. Set up scoring systems and track team performance.</p>
+                <a href="{{ url_for('leagues.index') }}" class="btn btn-warning">View Leagues</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity Section -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-clock-history me-2"></i>Recent Activity
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-hockey">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Getting Started:</strong> Your fantasy hockey platform is ready! Use the sidebar navigation to explore players, teams, and leagues.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
