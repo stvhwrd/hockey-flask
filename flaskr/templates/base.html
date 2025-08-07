@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Fantasy Hockey Platform{% endblock %}</title>
+    
+    <!-- Skeleton CSS Framework -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="row">
+                <div class="twelve columns">
+                    <h4 class="nav-title">
+                        <a href="{{ url_for('index') }}">🏒 Fantasy Hockey</a>
+                    </h4>
+                    <ul class="nav-list">
+                        <li><a href="{{ url_for('players.index') }}">Players</a></li>
+                        <li><a href="{{ url_for('teams.index') }}">Teams</a></li>
+                        <li><a href="{{ url_for('leagues.index') }}">Leagues</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="twelve columns">
+                    <p>&copy; 2025 Fantasy Hockey Platform. Built with Flask & Skeleton CSS.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    {% block scripts %}{% endblock %}
+</body>
+</html>

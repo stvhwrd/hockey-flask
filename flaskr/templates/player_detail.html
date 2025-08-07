@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}{{ player.name }} - Players{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="twelve columns">
+        <div class="card fade-in">
+            <div class="card-header">
+                <h1 class="card-title">{{ player.name }}</h1>
+                <p class="text-muted">
+                    <span class="badge badge-position">{{ player.position }}</span>
+                    {% if player.team_name %}
+                        <span class="badge badge-team">{{ player.team_name }}</span>
+                    {% else %}
+                        <span class="badge">Free Agent</span>
+                    {% endif %}
+                </p>
+            </div>
+            
+            <div class="row">
+                <div class="six columns">
+                    <div class="card">
+                        <h3>Player Information</h3>
+                        <table>
+                            <tr>
+                                <td><strong>Position:</strong></td>
+                                <td>{{ player.position }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Team:</strong></td>
+                                <td>
+                                    {% if player.team_name %}
+                                        {{ player.team_name }}
+                                    {% else %}
+                                        Free Agent
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jersey Number:</strong></td>
+                                <td>
+                                    {% if player.jersey_number %}
+                                        #{{ player.jersey_number }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Age:</strong></td>
+                                <td>
+                                    {% if player.age %}
+                                        {{ player.age }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Height:</strong></td>
+                                <td>
+                                    {% if player.height %}
+                                        {{ player.height }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Weight:</strong></td>
+                                <td>
+                                    {% if player.weight %}
+                                        {{ player.weight }} lbs
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="six columns">
+                    <div class="card">
+                        <h3>Season Statistics</h3>
+                        {% if stats %}
+                            {% for stat in stats %}
+                            <div class="card mb-1">
+                                <h4>{{ stat.season }} Season</h4>
+                                <div class="stat-grid">
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ stat.games_played }}</h3>
+                                        <p class="stat-label">Games</p>
+                                    </div>
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ stat.goals }}</h3>
+                                        <p class="stat-label">Goals</p>
+                                    </div>
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ stat.assists }}</h3>
+                                        <p class="stat-label">Assists</p>
+                                    </div>
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ stat.points }}</h3>
+                                        <p class="stat-label">Points</p>
+                                    </div>
+                                    {% if stat.plus_minus != 0 %}
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ stat.plus_minus }}</h3>
+                                        <p class="stat-label">+/-</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if stat.penalty_minutes > 0 %}
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ stat.penalty_minutes }}</h3>
+                                        <p class="stat-label">PIM</p>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    <!-- Goalie stats -->
+                                    {% if stat.wins > 0 or stat.losses > 0 %}
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ stat.wins }}-{{ stat.losses }}</h3>
+                                        <p class="stat-label">W-L</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if stat.save_percentage > 0 %}
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ "%.3f"|format(stat.save_percentage) }}</h3>
+                                        <p class="stat-label">Save %</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if stat.goals_against_average > 0 %}
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ "%.2f"|format(stat.goals_against_average) }}</h3>
+                                        <p class="stat-label">GAA</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if stat.shutouts > 0 %}
+                                    <div class="stat-card">
+                                        <h3 class="stat-value">{{ stat.shutouts }}</h3>
+                                        <p class="stat-label">SO</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-muted">No statistics available for this player.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-2">
+                <div class="twelve columns text-center">
+                    <a href="{{ url_for('players.index') }}" class="button">← Back to Players</a>
+                    {% if player.team_name %}
+                        <a href="{{ url_for('teams.detail', id=player.team_id) }}" class="button button-secondary">View {{ player.team_name }}</a>
+                    {% endif %}
+                    <a href="{{ url_for('index') }}" class="button">🏠 Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

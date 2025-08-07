@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found - Fantasy Hockey Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="twelve columns" style="text-align: center; padding: 4rem 0;">
+        <h2>🏒 Oops! Page Not Found</h2>
+        <p>The page you're looking for doesn't exist.</p>
+        <p>Maybe the player was traded or the team moved cities? 🤷‍♂️</p>
+        
+        <div style="margin-top: 2rem;">
+            <a href="/" class="button button-primary">Go Home</a>
+            <a href="/players/" class="button">Browse Players</a>
+            <a href="/teams/" class="button">Browse Teams</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

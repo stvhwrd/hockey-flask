@@ -1,0 +1,309 @@
+/* Fantasy Hockey Platform - Custom Styles with Skeleton CSS */
+
+/* Color Scheme - Hockey-inspired */
+:root {
+    --primary-color: #1e3a8a;      /* Hockey blue */
+    --secondary-color: #dc2626;    /* Hockey red */
+    --accent-color: #fbbf24;       /* Gold/yellow */
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --background-light: #f9fafb;
+    --border-color: #e5e7eb;
+    --success-color: #10b981;
+    --white: #ffffff;
+}
+
+/* Body and Typography */
+body {
+    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--background-light);
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-title {
+    margin: 0;
+    display: inline-block;
+    margin-right: 2rem;
+}
+
+.nav-title a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.nav-list li {
+    display: inline-block;
+    margin-right: 1.5rem;
+}
+
+.nav-list a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-list a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content */
+.main-content {
+    min-height: calc(100vh - 200px);
+    padding: 2rem 0;
+}
+
+/* Cards and Containers */
+.card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+}
+
+.card-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.card-title {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 2.4rem;
+}
+
+/* Buttons - Enhanced Skeleton */
+.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    transition: all 0.3s ease;
+}
+
+.button.button-primary, button.button-primary, input[type="submit"].button-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.button.button-primary:hover, button.button-primary:hover {
+    background-color: #1e40af;
+    border-color: #1e40af;
+}
+
+.button.button-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.button.button-secondary:hover {
+    background-color: #ef4444;
+    border-color: #ef4444;
+    color: var(--white);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+tr:hover {
+    background-color: #e2e8f0;
+}
+
+/* Lists */
+.player-list, .team-list, .league-list {
+    list-style: none;
+    padding: 0;
+}
+
+.player-list li, .team-list li, .league-list li {
+    background: var(--white);
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.player-list li:hover, .team-list li:hover, .league-list li:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.player-list a, .team-list a, .league-list a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.player-list a:hover, .team-list a:hover, .league-list a:hover {
+    color: var(--secondary-color);
+}
+
+/* Stats and Info */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.stat-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.stat-label {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin: 0.5rem 0 0 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-position {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+}
+
+.badge-team {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.badge-conference {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+/* Responsive adjustments */
+@media (max-width: 550px) {
+    .nav-title {
+        display: block;
+        margin-bottom: 1rem;
+    }
+    
+    .nav-list {
+        display: block;
+    }
+    
+    .nav-list li {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Footer */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.footer p {
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-muted { color: var(--text-light); }
+.text-primary { color: var(--primary-color); }
+.text-secondary { color: var(--secondary-color); }
+
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+
+.p-1 { padding: 1rem; }
+.p-2 { padding: 2rem; }
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}

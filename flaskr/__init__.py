@@ -1,6 +1,6 @@
 # Fantasy Hockey Flask App
 import os
-from flask import Flask
+from flask import Flask, render_template
 
 
 def create_app(test_config=None):
@@ -34,16 +34,9 @@ def create_app(test_config=None):
     app.register_blueprint(teams.bp)
     app.register_blueprint(leagues.bp)
 
-    # a simple page that says hello
+    # home page
     @app.route('/')
     def index():
-        return '''
-        <h1>Fantasy Hockey Platform</h1>
-        <ul>
-            <li><a href="/players">Players</a></li>
-            <li><a href="/teams">Teams</a></li>
-            <li><a href="/leagues">Leagues</a></li>
-        </ul>
-        '''
+        return render_template('index.html')
 
     return app
