@@ -11,23 +11,23 @@ A Flask-based fantasy hockey web application with a SQLite database.
 
 ## Quick Start
 
-1. Activate your virtual environment:
+1. Create your virtual environment:
+
+   ```bash
+   python3 -m venv .venv
+   ```
+
+2. Activate your virtual environment:
 
    ```bash
    source .venv/bin/activate
    ```
 
-2. Initialize the database (first time only):
+3. Initialize the database (first time only):
 
    ```bash
    export FLASK_APP=flaskr
    flask init-db
-   ```
-
-3. Populate with test data (first time only):
-
-   ```bash
-   python populate_test_data.py
    ```
 
 4. Run the application:
@@ -36,7 +36,45 @@ A Flask-based fantasy hockey web application with a SQLite database.
    python app.py
    ```
 
-5. Visit <http://localhost:5000> in your browser
+   Or use the enhanced development server with more options:
+
+   ```bash
+   python dev_server.py
+   ```
+
+5. Visit <http://localhost:5000> in your browser (opens automatically in development mode)
+
+## Development Features
+
+### Auto-Browser Launch & Live Reload
+
+The application includes enhanced development features:
+
+- **Auto-browser launch**: Automatically opens your default browser when starting the server
+- **Live reload**: Automatically restarts the server when you make changes to files
+- **Interactive debugger**: Detailed error pages with interactive debugging in the browser
+- **Threaded requests**: Handle multiple requests simultaneously during development
+
+### Development Server Options
+
+Use the enhanced development server for more control:
+
+```bash
+# Basic usage (auto-browser + live reload enabled)
+python dev_server.py
+
+# Run on different port
+python dev_server.py --port 8000
+
+# Disable auto-browser launch
+python dev_server.py --no-browser
+
+# Disable live reload
+python dev_server.py --no-reload
+
+# Run in production mode (no debug features)
+python dev_server.py --production
+```
 
 ## Application Structure
 
