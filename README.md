@@ -49,11 +49,60 @@ A Flask-based fantasy hockey web application with a SQLite database.
 │   ├── players.py           # Players blueprint
 │   ├── teams.py             # Teams blueprint
 │   └── leagues.py           # Fantasy leagues blueprint
+├── tests/                    # Test suite
+│   ├── __init__.py          # Test package
+│   ├── test_base.py         # Base test case class
+│   ├── test_app.py          # Application factory tests
+│   ├── test_database.py     # Database functionality tests
+│   ├── test_routes.py       # Web routes and API tests
+│   └── test_populate_data.py # Data population tests
 ├── populate_test_data.py    # Script to add test data
+├── run_tests.py             # Test runner script
 ├── setup.py                 # Setup script
+├── requirements.txt         # Python dependencies
+├── .gitignore              # Git ignore file
 └── instance/                # Instance folder (created automatically)
     └── hockey.sqlite        # SQLite database
 ```
+
+## Testing
+
+The application includes a comprehensive test suite using Python's built-in `unittest` module:
+
+### Running Tests
+
+Run all tests:
+```bash
+python run_tests.py
+```
+
+Run specific test module:
+```bash
+python run_tests.py test_routes
+python run_tests.py test_database
+```
+
+Run individual test file:
+```bash
+python -m unittest tests.test_routes
+```
+
+### Test Coverage
+
+The test suite includes:
+
+- **Application Tests** (`test_app.py`): Application factory, configuration, blueprints
+- **Database Tests** (`test_database.py`): Database connections, data integrity, relationships
+- **Routes Tests** (`test_routes.py`): Web pages, API endpoints, error handling
+- **Data Population Tests** (`test_populate_data.py`): Test data setup and constraints
+
+**29 tests total** covering:
+- Web route functionality
+- API endpoint responses
+- Database operations
+- Error handling (404s)
+- Data relationships
+- Application configuration
 
 ## Database Schema
 
