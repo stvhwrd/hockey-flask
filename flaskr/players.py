@@ -14,7 +14,7 @@ def index():
         ' LEFT JOIN nhl_teams t ON p.team_id = t.id'
         ' ORDER BY p.name'
     ).fetchall()
-    
+
     return render_template('players.html', players=players)
 @bp.route('/<int:id>')
 def detail(id):
@@ -27,16 +27,16 @@ def detail(id):
         ' WHERE p.id = ?',
         (id,)
     ).fetchone()
-    
+
     if player is None:
         return "Player not found", 404
-    
+
     # Get player stats
     stats = db.execute(
         'SELECT * FROM player_stats WHERE player_id = ? ORDER BY season DESC',
         (id,)
     ).fetchall()
-    
+
     return render_template('player_detail.html', player=player, stats=stats)
 @bp.route('/api')
 def api():

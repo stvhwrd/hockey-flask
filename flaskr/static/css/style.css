@@ -253,17 +253,17 @@ tr:hover {
         display: block;
         margin-bottom: 1rem;
     }
-    
+
     .nav-list {
         display: block;
     }
-    
+
     .nav-list li {
         display: block;
         margin-right: 0;
         margin-bottom: 0.5rem;
     }
-    
+
     .stat-grid {
         grid-template-columns: 1fr;
     }
