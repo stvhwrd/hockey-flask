@@ -40,29 +40,29 @@ A Flask-based fantasy hockey web application with a SQLite database.
 
 ## Application Structure
 
-```
-├── app.py                    # Main application entry point
-├── flaskr/                   # Flask application package
-│   ├── __init__.py          # Application factory
-│   ├── db.py                # Database functions
-│   ├── schema.sql           # Database schema
-│   ├── players.py           # Players blueprint
-│   ├── teams.py             # Teams blueprint
-│   └── leagues.py           # Fantasy leagues blueprint
-├── tests/                    # Test suite
-│   ├── __init__.py          # Test package
-│   ├── test_base.py         # Base test case class
-│   ├── test_app.py          # Application factory tests
-│   ├── test_database.py     # Database functionality tests
-│   ├── test_routes.py       # Web routes and API tests
-│   └── test_populate_data.py # Data population tests
-├── populate_test_data.py    # Script to add test data
-├── run_tests.py             # Test runner script
-├── setup.py                 # Setup script
-├── requirements.txt         # Python dependencies
-├── .gitignore              # Git ignore file
-└── instance/                # Instance folder (created automatically)
-    └── hockey.sqlite        # SQLite database
+```sh
+├── app.py                     # Main application entry point
+├── flaskr/                    # Flask application package
+│   ├── __init__.py            # Application factory
+│   ├── db.py                  # Database functions
+│   ├── schema.sql             # Database schema
+│   ├── players.py             # Players blueprint
+│   ├── teams.py               # Teams blueprint
+│   └── leagues.py             # Fantasy leagues blueprint
+├── tests/                     # Test suite
+│   ├── __init__.py            # Test package
+│   ├── test_base.py           # Base test case class
+│   ├── test_app.py            # Application factory tests
+│   ├── test_database.py       # Database functionality tests
+│   ├── test_routes.py         # Web routes and API tests
+│   └── test_populate_data.py  # Data population tests
+├── populate_test_data.py      # Script to add test data
+├── run_tests.py               # Test runner script
+├── setup.py                   # Setup script
+├── requirements.txt           # Python dependencies
+├── .gitignore                 # Git ignore file
+└── instance/                  # Instance folder (created automatically)
+    └── hockey.sqlite          # SQLite database
 ```
 
 ## Testing
